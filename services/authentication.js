@@ -4,6 +4,7 @@ const secret = "uDVil/n8D3xASiu2JFpG+v1EpJQZ7gOPC57546T49P0="
 function createTokenForUser(user) {
     const payload = {
         _id: user._id,
+        fullName: user.fullName,
         email: user.email,
         profileImageURL: user.profileImageURL,
         role: user.role,
