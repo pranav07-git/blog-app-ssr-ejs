@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>HOME</title>
+  </head>
+
+  <body>
+    <%- include("./partials/nav") %>
+    <div class="container mt-20 ml-30">
+        <div class="container flex mt-5">
+        <img src="<%= blogs.createdBy.profileImageURL %>" width="50px" alt="user-profile">
+        <p class="mt-3 ml-3"><%= blogs.createdBy.fullName %></p>
+    </div>
+        <h1 class="text-6xl mt-5 mb-10"><%= blogs.title %></h1>
+        <img src="<%= blogs.coverImageURL %>" alt="coverImage" width="700px">
+        <pre class="mt-10 mb-10"><%= blogs.body %></pre>
+    </div>
+    <h1 class="text-3xl mt-2 mb-5 ml-30">Comments (<%= comments.length %>)</h1>
+    <div class="container mt-3">
+        <% if (locals.user) { %>
+            <form class="ml-30 mx-auto" action="/blog/comment/<%=blogs._id  %>"" method="POST">
+        
+        <div class="relative z-0 w-full mb-5 group">
+          <input
+            type="text"
+            autocomplete="off"
+            name="content"
+            id="content"
+            class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer"
+            placeholder="enter your comment"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="text-black mb-5 bg-blue-100 cursor-pointer box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+        >
+          Submit
+        </button>
+        </form>
+        <% } else {%>
+            <h1 class="text-3xl mt-2 mb-5 ml-30">Sign in to Add Comments</h1>
+<a href="/user/signin"
+   class="inline-flex items-center gap-3 ml-30 text-lg font-semibold  py-3 px-6 text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg">
+
+    <svg xmlns="http://www.w3.org/2000/svg"
+         width="22"
+         height="22"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round">
+        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+        <polyline points="10 17 15 12 10 7"/>
+        <line x1="15" y1="12" x2="3" y2="12"/>
+    </svg>
+
+    SIGN IN
+</a>        <% } %>
+    </div>
+
+    <div class="container ml-30">
+            <% comments.forEach(comment => { %>
+             <div class="container flex mt-5 mb-20">
+                <img src="<%= comment.createdBy.profileImageURL %>" width="50px" alt="user-profile">
+                <p class="mt-3 ml-3"><%= comment.createdBy.fullName %> :</p> <pre class="mt-3 ml-1"><%= comment.content %></pre>
+                <% if (locals.user && user._id.toString() === comment.createdBy._id.toString()) { %>
+                 <form class="ml-250 mt-3" action="/blog/comment/<%=comment._id  %>?_method=DELETE"
+      method="POST">
+                <button
+          type="submit"
+          class="text-white bg-red-500 cursor-pointer box-border border border-transparent focus:ring-4 focus:ring-red-500 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
+        >
+          Submit
+        </button>
+            </form>
+                <% } %>
+             </div>
+
+            <% }) %>
+           
+        </div>
+
+    <%- include("./partials/script") %>
+    
+  </body>
+</html>

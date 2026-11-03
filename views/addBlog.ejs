@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>Add New Blog</title>
+  </head>
+
+  <body>
+    <%- include("./partials/nav") %> <%- include("./partials/script") %>
+
+    <div class="container mt-50 ml-50">
+      <form action="/blog" method="POST" enctype="multipart/form-data">
+        <div class="mb-5">
+          <label
+          class="block mb-2.5 text-sm font-medium text-heading"
+          for="coverImage"
+          >Upload file</label
+        >
+        <input
+          class="cursor-pointer bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-200 shadow-xs placeholder:text-body"
+          id="CoverImage"
+          name="coverImage"
+          type="file"
+        />
+        </div>
+
+        <div class="mb-5">
+          <label
+            for="email"
+            class="block mb-2.5 text-sm font-medium text-heading"
+            >Title</label
+          >
+          <input
+            type="text"
+            id="title"
+            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-100 px-3 py-2.5 shadow-xs placeholder:text-body"
+            placeholder="Arrow Functions in JS"
+            name="title"
+            required
+          />
+        </div>
+        <div class="mb-5">
+          <label
+            for="body"
+            class="block mb-2.5 text-sm font-medium text-heading"
+            >Body</label
+          >
+          <textarea
+            id="body"
+            rows="4"
+            class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-200 p-3.5 shadow-xs placeholder:text-body"
+            placeholder="Write your thoughts here..."
+            name="body"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 cursor-pointer focus:outline-none"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
