@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser")
 const methodOverride = require("method-override");
 
+require('dotenv').config();
 const Blog = require("./models/blog")
 
 const userRoute = require("./routes/user");
@@ -11,9 +12,9 @@ const blogRoute = require("./routes/blog");
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 mongoose
-.connect("mongodb://127.0.0.1:27017/blog-app")
+.connect(process.env.MONGO_URL)
 .then((data) => {
   console.log("MongoDb Connected");
 })
